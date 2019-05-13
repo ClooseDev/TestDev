@@ -8,44 +8,39 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class TasksPage extends Component {
     state = {};
 
-    deleteAllTasksHandler() {
+    constructor(props) {
+        super(props);
+        this.state.tasks = [];
+    }
+
+    deleteAllTasksHandler = () => {
         Tasks.deleteAll().then(() => {
             this.reloadTasks();
         })
     }
 
-    deleteTaskHandler(id) {
+    deleteTaskHandler = (id) => {
         Tasks.delete(id).then(() => {
             this.reloadTasks();
         })
     }
 
-    addTaskHandler(text) {
+    addTaskHandler = (text) => {
         Tasks.add(text).then(() => {
             this.reloadTasks();
         })
     }
 
-    editTaskHandler(id, text) {
+    editTaskHandler = (id, text) => {
         Tasks.edit(id, text).then(() => {
             this.reloadTasks();
         })
     }
 
-    reloadTasks() {
+    reloadTasks = () => {
         Tasks.getAll().then((tasks) => {
             this.setState({ 'tasks': tasks })
         });
-    }
-
-    constructor(props) {
-        super(props);
-        this.state.tasks = [];
-        this.addTaskHandler = this.addTaskHandler.bind(this);
-        this.deleteAllTasksHandler = this.deleteAllTasksHandler.bind(this);
-        this.deleteTaskHandler = this.deleteTaskHandler.bind(this);
-        this.reloadTasks = this.reloadTasks.bind(this);
-        this.editTaskHandler = this.editTaskHandler.bind(this);
     }
 
     componentDidMount() {

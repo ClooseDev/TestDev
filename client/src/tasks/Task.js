@@ -8,19 +8,16 @@ class Task extends Component {
 
     this.state.text = props.info.description;
     this.state.editing = false;
-    this.textClickHandler = this.textClickHandler.bind(this);
-    this.saveClickHandler = this.saveClickHandler.bind(this);
-    this.inputChangeHandler = this.inputChangeHandler.bind(this);
   }
 
-  textClickHandler() {
+  textClickHandler = () => {
     console.log('text click');
     this.setState({
       editing: true
     });
   }
 
-  saveClickHandler() {
+  saveClickHandler = () => {
     console.log('save');
     this.setState({
       editing: false
@@ -28,8 +25,8 @@ class Task extends Component {
     this.props.editTaskHandler(this.props.info._id, this.state.text);
   }
 
-  inputChangeHandler(event) {
-    this.setState({text: event.target.value});
+  inputChangeHandler = (event) => {
+    this.setState({ text: event.target.value });
   }
 
   render() {
@@ -56,15 +53,15 @@ class Task extends Component {
     }
 
     return (
-        <div className="col col-12 col-md-6 col-lg-4">
-            <div className="card" style={{width: '18rem'}}>
-                <div className="card-body">
-                  {cardContent}
-                  <a href="#" onClick={(e) => {this.props.deleteTaskHandler(this.props.info._id)}} className="btn btn-danger">Удалить</a>
-                  {saveButton}
-                </div>
-            </div>
+      <div className="col col-12 col-md-6 col-lg-4">
+        <div className="card" style={{ width: '18rem' }}>
+          <div className="card-body">
+            {cardContent}
+            <a href="#" onClick={(e) => { this.props.deleteTaskHandler(this.props.info._id) }} className="btn btn-danger">Удалить</a>
+            {saveButton}
+          </div>
         </div>
+      </div>
     );
   }
 }

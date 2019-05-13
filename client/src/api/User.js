@@ -67,7 +67,6 @@ export default {
 
         const requestOptions = {
             method: 'POST',
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -94,7 +93,6 @@ export default {
 
         const requestOptions = {
             method: 'GET',
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             }

@@ -1,5 +1,3 @@
-import request from 'request';
-
 const BL_URL = '/api/';
 
 export default {
@@ -9,7 +7,6 @@ export default {
 
       const requestOptions = {
          method: 'DELETE',
-         credentials: 'include',
          headers: {
             'Content-Type': 'application/json'
          }
@@ -33,24 +30,29 @@ export default {
    },
 
    deleteAll: function () {
-      let options = {
+      const requestUrl = BL_URL + 'tasks';
+
+      const requestOptions = {
          method: 'DELETE',
-         url: BL_URL + 'tasks',
          headers: {
-            'cache-control': 'no-cache'
+            'Content-Type': 'application/json'
          }
       };
 
       return new Promise((resolve, reject) => {
-         request(options, (error, response, body) => {
-            if (error) {
-               console.log(error);
-               reject();
-            } else {
-               console.log('Tasks deleted successfully');
-               resolve();
-            }
-         });
+         fetch(requestUrl, requestOptions)
+            .then(res => {
+               if (res.ok) {
+                  console.log('Tasks deleted successfully');
+                  resolve();
+               } else {
+                  console.log('Couldn\'t delete tasks');
+                  reject();
+               }
+            })
+            .catch(err => {
+               console.log(err);
+            });
       });
    },
 

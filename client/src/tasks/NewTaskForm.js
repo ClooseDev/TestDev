@@ -6,16 +6,14 @@ class NewTaskForm extends Component {
     constructor(props) {
         super(props);
         this.state.text = '';
-        this.buttonClickHandler = this.buttonClickHandler.bind(this);
-        this.inputChangeHandler = this.inputChangeHandler.bind(this);
     }
 
-    buttonClickHandler() {
+    buttonClickHandler = () => {
         this.props.addTaskHandler(this.state.text);
         this.setState({text: ''});
     }
 
-    inputChangeHandler(event) {
+    inputChangeHandler = (event) => {
         this.setState({text: event.target.value});
     }
 
