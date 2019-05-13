@@ -1,0 +1,23 @@
+.card {
+  margin-top: 20px;
+}
+
+#delete-all-button {
+  margin-right: 10px;
+}
+
+.button-margin {
+  margin-right: 10px;
+}
+
+.container {
+  padding-top: 2rem;
+}
+
+.task-save-button {
+  margin-left: 12px;
+}
+
+.width100 {
+  width: 100%;
+}
