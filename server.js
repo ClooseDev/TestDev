@@ -9,15 +9,9 @@ const isOnHeroku = process.env.NODE && ~process.env.NODE.indexOf("heroku");
 // create express app
 const app = express();
 
-if (isOnHeroku) {
-    const path = require('path')
-    // Serve static files from the React frontend app
-    app.use(express.static(path.join(__dirname, 'client/build')))
-    // Anything that doesn't match the above, send back index.html
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname + '/client/build/index.html'))
-    })
-}
+const path = require('path')
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'client/build')))
 
 
 let allowedOrigin = 'http://localhost:5000';
@@ -64,6 +58,13 @@ app.get('/api/testroute', (req, res) => {
 
 require('./app/routes/task.routes.js')(app);
 require('./app/routes/user.routes.js')(app);
+
+if (isOnHeroku) {
+    // Anything that doesn't match the above, send back index.html
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname + '/client/build/index.html'))
+    })
+}
 
 app.set('port', (process.env.PORT || 5000));
 
