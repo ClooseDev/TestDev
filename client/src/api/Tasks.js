@@ -1,5 +1,4 @@
 import request from 'request';
-import { realpath } from 'fs';
 
 const BL_URL = '/api/';
 

@@ -11,18 +11,7 @@ const app = express();
 
 const path = require('path')
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, 'client/build')))
-
-
-let allowedOrigin = 'http://localhost:5000';
-if (isOnHeroku) {
-    allowedOrigin = 'https://tensor-webdev19-tasks-client.herokuapp.com';
-}
-
-app.use(cors({ origin: allowedOrigin, credentials: true }))
-
-// For cookies to work on heroku
-app.enable('trust proxy');
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
