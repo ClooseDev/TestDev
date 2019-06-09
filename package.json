@@ -13,15 +13,16 @@
     "Mongoose",
     "Notes"
   ],
-  "author": "callicoder",
+  "author": "artem",
   "license": "MIT",
   "dependencies": {
+    "request": "*",
     "bcrypt": "*",
     "body-parser": "^1.18.3",
     "cookie-parser": "*",
     "cors": "*",
     "express": "^4.16.3",
-    "mongoose": "^5.2.8",
+    "mongoose": "^5.5.14",
     "path": "^0.12.7",
     "uniqid": "*"
   }

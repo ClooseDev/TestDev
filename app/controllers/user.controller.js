@@ -6,6 +6,7 @@ exports.register = (req, res) => {
     const { username, password } = req.body;
     const user = new User({ username, password });
 
+    console.log('hee');
     user.save()
         .then(data => {
             res.send(data);

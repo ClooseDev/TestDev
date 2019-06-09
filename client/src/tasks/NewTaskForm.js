@@ -22,7 +22,7 @@ class NewTaskForm extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col col-8 col-md-6 col-lg-4">
-                        <input onChange={this.inputChangeHandler} value={this.state.text} className="form-control mr-sm-2" type="text" placeholder="Задача"/>
+                        <input onChange={this.inputChangeHandler} value={this.state.text} className="form-control mr-sm-2" type="text" placeholder="Введите url пользователя Вконтакте"/>
                     </div>
                     <div className="col col-4 col-md-6 col-lg-4">
                         <button onClick={this.buttonClickHandler} className="btn btn-outline-success">Добавить</button>

@@ -1,3 +1,3 @@
 module.exports = {
-    url: process.env.MONGO_URL || 'mongodb://localhost:27017/tasksapp'
+    url: process.env.MONGO_URL || 'mongodb://app:12345@127.0.0.1:27017/testapp'
 }
