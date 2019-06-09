@@ -4,6 +4,10 @@ const TaskSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     icon: String,
+    audios: String,
+    videos: String,
+    albums: String,
+    followers: String,
     description: String,
     username: String
 }, {

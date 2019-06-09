@@ -10,6 +10,10 @@ class Task extends Component {
         this.state.firstName = props.info.firstName;
         this.state.lastName = props.info.lastName;
         this.state.icon = props.info.icon;
+        this.state.audios = props.info.audios;
+        this.state.videos = props.info.videos;
+        this.state.albums = props.info.albums;
+        this.state.followers = props.info.followers;
         this.state.editing = false;
     }
 
@@ -38,7 +42,7 @@ class Task extends Component {
         if (this.state.editing) {
             cardContent = (
                 <p className="card-text">
-                    <input onChange={this.inputChangeHandler} value={this.state.text} className="form-control mr-sm-2"
+                    <input onChange={this.inputChangeHandler} placeholder="Псевдоним" value={this.state.text} className="form-control mr-sm-2"
                            type="text"/>
                 </p>
             );
@@ -60,10 +64,15 @@ class Task extends Component {
         return (
             <div className="col col-12 col-md-6 col-lg-4">
                 <div className="card" style={{width: '18rem'}}>
-                    <div className="card-body img-fluid">
-                        <img src={this.state.icon} alt={"Icon"} className={"img-fluid"}/>
+                    <div className="card-body img-fluid text-center">
+                        <img src={this.state.icon} alt={"Icon"} className={"rounded"}/>
                         <p>
                             {this.state.firstName + ' ' + this.state.lastName}
+                        </p>
+                        <p>
+                            {'Альбомов: ' + this.state.albums + ' аудио: ' + this.state.audios + ' видео: ' + this.state.videos}
+                            <br/>
+                            {'Всего подписчиков: ' + this.state.followers}
                         </p>
                         {cardContent}
                         <a href="#" onClick={(e) => {

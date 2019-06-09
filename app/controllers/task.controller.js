@@ -15,7 +15,7 @@ exports.create = (req, res) => {
 
     let id = url.parse(req.body.description).pathname.toString();
     id = id.replace('/', '');
-    let reqId = base_url + 'users.get?access_token=' + token + '&user_ids=' + id + '&v=5.95&fields=first_name,followers_count,last_name,photo_max';
+    let reqId = base_url + 'users.get?access_token=' + token + '&user_ids=' + id + '&v=5.95&fields=first_name,followers_count,last_name,photo_max,counters,nickname';
     console.log(reqId);
     console.log(id);
     console.log('result');
@@ -25,43 +25,58 @@ exports.create = (req, res) => {
             return console.log(err);
         }
         if (body.response.length > 0) {
-            let userId = body.response[0].id;
-            let reqFriends = base_url + 'friends.get?access_token=' + token + '&user_id=' + userId + '&v=5.95&fields=first_name,followers_count,last_name,photo_max&order=name';
-            request(reqFriends, {json: true}, (err, _, body) => {
-                if (err) {
-                    return console.log(err);
-                }
-                if (body.response.items.length > 0) {
-                    for (i = 0; i < body.response.items.length; i++) {
-                        let item = body.response.items[i];
-                        if (item.first_name.length == 0) {
-                            continue;
-                        }
-                        // if (typeof(item.followers_count) != "undefined") {
-                        //     console.log('undefined founded');
-                        //     continue;
-                        // }
-                        // Create a Task
-                        const task = new Task({
-                            firstName: item.first_name,
-                            lastName: item.last_name,
-                            icon: item.photo_max,
-                            description: 'Всего подписчиков: ' + item.followers_count,
-                            username: req.username
-                        });
-                        // Save Task in the database
-                        task.save()
-                            .then(data => {
-                                res.send(data);
-                            }).catch(err => {
-                            res.status(500).send({
-                                message: err.message || "Some error occurred while creating the Task."
-                            });
-                        });
-                    }
-                }
+            let user = body.response[0];
+            console.log(user);
 
+            if (user.first_name.length === 0) {
+                return
+            }
+            // if (typeof(item.followers_count) != "undefined") {
+            //     console.log('undefined founded');
+            //     continue;
+            // }
+            // Create a Task
+            if (user.nickname === 'undefined') {
+                user.nickname = '';
+            }
+            const task = new Task({
+                firstName: user.first_name,
+                lastName: user.last_name,
+                icon: user.photo_max,
+                albums: user.counters.albums,
+                videos: user.counters.videos,
+                audios: user.counters.audios,
+                followers: user.followers_count,
+                description: 'Псевдоним ' + user.nickname,
+                username: req.username
             });
+            console.log(task);
+            // Save Task in the database
+            task.save()
+                .then(data => {
+                    res.send(data);
+                }).catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred while creating the Task."
+                });
+            });
+
+
+
+            // let userId = body.response[0].id;
+            // let reqFriends = base_url + 'friends.get?access_token=' + token + '&user_id=' + userId + '&v=5.95&fields=first_name,followers_count,last_name,photo_max&order=name';
+            // request(reqFriends, {json: true}, (err, _, body) => {
+            //     if (err) {
+            //         return console.log(err);
+            //     }
+            //     if (body.response.items.length > 0) {
+            //         for (i = 0; i < body.response.items.length; i++) {
+            //             let item = body.response.items[i];
+            //
+            //         }
+            //     }
+            //
+            // });
         }
     });
 };

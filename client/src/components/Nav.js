@@ -13,7 +13,7 @@ class Nav extends Component {
     updateUserText() {
         User.getUsername()
             .then(username => {
-                const authText = 'Authorized as: ' + username;
+                const authText = 'Пользователь: ' + username;
                 this.setState({authText});
             })
             .catch(err => {
@@ -55,16 +55,20 @@ class Nav extends Component {
             authButtons = (<Link to="/auth/"><button className="btn btn-outline-success my-2 my-sm-0" id="delete-all-button">Log In</button></Link>)
         }
 
+        var iconStyle = {
+            width: '30px'
+        }
         return (
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                <a className="navbar-brand" href="#">Tasks App</a>
+                <a className="navbar-brand" href="#">Хранитель аккаунтов вконтакте</a>
+                <img src="https://pngicon.ru/file/uploads/vk.png" alt="Иконка вк" style={iconStyle}/>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/tasks/">Tasks</Link>
+                            <Link className="nav-link" to="/tasks/">Список</Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav">
